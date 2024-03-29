@@ -1,6 +1,7 @@
 import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
 import { QuestionCard } from "./QuestionCard";
 import { CategoryCard } from "./CategoryCard";
+import { useEffect, useState } from "react";
 
 export function JeopardyRound({
   boardInfo,
@@ -14,6 +15,7 @@ export function JeopardyRound({
   isEditMode: boolean;
 }) {
   // TODO: add daily double
+  const [doubleJeopardy, setDoubleJeopardy] = useState<number[]>([]);
 
   const BoardItem = (
     q: string,
@@ -25,7 +27,7 @@ export function JeopardyRound({
   ) => {
     return (
       <GridItem
-        key={row}
+        key={col + "-" + row}
         colSpan={1}
         rowSpan={1}
         gridColumn={col / 6}
@@ -42,7 +44,7 @@ export function JeopardyRound({
           <QuestionCard
             qNo={row}
             points={isDouble ? row * 400 : row * 200}
-            isDaily={false} // isDaily={board.isDaily}
+            isDaily={doubleJeopardy.includes(col * 5 + row)}
             question={q}
             categoryName={title}
             categoryID={id}
@@ -54,12 +56,33 @@ export function JeopardyRound({
     );
   };
 
+  const getRandomNumber = () => {
+    return Math.floor(Math.random() * 30) + 1;
+  };
+
+  useEffect(() => {
+    if (doubleJeopardy.length === 0) {
+      const newDoubleJeopardy = [getRandomNumber()];
+      console.log(newDoubleJeopardy, "num");
+      if (isDouble) {
+        let nextNumber = getRandomNumber();
+        if (nextNumber === newDoubleJeopardy[0]) {
+          nextNumber = nextNumber + (5 % 30);
+        }
+
+        newDoubleJeopardy.push(nextNumber);
+      }
+
+      setDoubleJeopardy(newDoubleJeopardy);
+    }
+  }, [doubleJeopardy, isDouble]);
+
   return (
     <>
       <Box backgroundColor={"black"}>
         <Grid templateColumns="repeat(6, 1fr)" width="80%" margin="auto">
           {boardContent.map((category, i) => (
-            <>
+            <div key={category.id + "c"}>
               <CategoryCard
                 title={category.title}
                 categoryID={category.id}
@@ -135,7 +158,7 @@ export function JeopardyRound({
                 </Box>
                 </GridItem>
             )} */}
-            </>
+            </div>
           ))}
 
           {/* {categories.map((category, index) => (

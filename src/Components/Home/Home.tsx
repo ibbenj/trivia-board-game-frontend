@@ -4,13 +4,11 @@ import { useState, useEffect } from "react";
 
 export function Home(/*{ points, isDaily, question, category }*/) {
   const createGame = async () => {
-    const gameID = uuidv4();
-
     // Create a new game
     const res = await fetch("http://localhost:8080/game/create", {
       method: "POST",
       body: JSON.stringify({
-        gameID,
+        gameID: uuidv4(),
       }),
     });
 
@@ -19,7 +17,8 @@ export function Home(/*{ points, isDaily, question, category }*/) {
       throw resJOSN.message;
     }
 
-    window.location.href = `/play/${gameID}`;
+    const resJOSN = await res.json();
+    window.location.href = `/play/${resJOSN.gameID}`;
   };
 
   const [gameList, setGameList] = useState<any[] | null>(null);

@@ -24,7 +24,7 @@ import React, { useEffect, useState } from "react";
 export function QuestionCard({
   qNo,
   points,
-  isDaily = false,
+  isDaily,
   categoryName,
   categoryID,
   question,
