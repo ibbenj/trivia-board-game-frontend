@@ -63,6 +63,7 @@ export function CategoryCard({
   return (
     <>
       <GridItem
+        height={"12vh"}
         key={index}
         colSpan={1}
         rowSpan={1}
@@ -78,7 +79,6 @@ export function CategoryCard({
               borderColor="black"
               boxShadow="md"
               backgroundColor="#0831c4"
-              minH="100px"
               textAlign={"center"}
             >
               <Text textColor={"white"} as="b" fontSize={"xl"}>

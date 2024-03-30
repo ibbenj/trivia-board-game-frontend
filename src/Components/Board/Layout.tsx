@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { JeopardyRound } from "./JeopardyRound";
 import { ScoreCards } from "./ScoreCards";
-// import { FinalJeopardy } from "./FinalJeopardy";
+import { FinalJeopardy } from "./FinalJeopardy";
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 
@@ -53,9 +53,9 @@ export function Layout(/*{ points, isDaily, question, category }*/) {
 
   return (
     // Do three tabs, single, double and final jeopardy
-    <>
+    <Box marginY="5" marginX="2">
       <Tabs variant="soft-rounded" colorScheme="green">
-        <TabList>
+        <TabList justifyContent={"space-around"}>
           <Flex direction={"row"} justifyContent={"space-between"}>
             <Flex direction={"row"} justifyContent={"left"}>
               <Tab>Jeopardy</Tab>
@@ -79,7 +79,7 @@ export function Layout(/*{ points, isDaily, question, category }*/) {
                 </Button>
               )}
             </Flex>
-            <Button onClick={homePage}>Exit Game</Button>
+            <Button marginLeft={"5"} onClick={homePage}>Exit Game</Button>
           </Flex>
         </TabList>
         <TabPanels>
@@ -100,11 +100,11 @@ export function Layout(/*{ points, isDaily, question, category }*/) {
             />
           </TabPanel>
           <TabPanel>
-            {/* <FinalJeopardy finalBoard={final} /> */}
+            <FinalJeopardy finalBoard={final} isEditMode={isEditMode} />
           </TabPanel>
         </TabPanels>
       </Tabs>
       <ScoreCards />
-    </>
+    </Box>
   );
 }

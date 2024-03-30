@@ -31,7 +31,7 @@ export function QuestionCard({
   answer,
   isEditMode,
 }: {
-  qNo: number
+  qNo: number;
   points: number;
   isDaily: boolean;
   categoryName: string;
@@ -42,52 +42,62 @@ export function QuestionCard({
 }) {
   const [isCompleted, setIsCompleted] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpen: isOpenEdit, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure();
+  const {
+    isOpen: isOpenEdit,
+    onOpen: onOpenEdit,
+    onClose: onCloseEdit,
+  } = useDisclosure();
 
-  const [ curQuestion, setCurQuestion ] = useState<string | undefined>(undefined);
-  const [ curAnswer, setCurAnswer ] = useState<string | undefined>(undefined);
-  const [ newQuestion, setNewQuestion ] = useState(question);
-  const [ newAnswer, setNewAnswer ] = useState(answer);
+  const [curQuestion, setCurQuestion] = useState<string | undefined>(undefined);
+  const [curAnswer, setCurAnswer] = useState<string | undefined>(undefined);
+  const [newQuestion, setNewQuestion] = useState(question);
+  const [newAnswer, setNewAnswer] = useState(answer);
 
   const saveCard = async () => {
-    const res = await fetch('http://localhost:8080/category/update',{
-      method: 'POST',
+    const res = await fetch("http://localhost:8080/category/update", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         categoryID: categoryID,
         qNo: qNo,
         question: newQuestion,
         answer: newAnswer,
-      })
+      }),
     });
 
     if (!res.ok) {
       const resJOSN = await res.json();
       throw resJOSN.message;
     }
-    
+
     setCurQuestion(newQuestion);
     setCurAnswer(newAnswer);
-  }
+  };
 
-  useEffect(()=>{
-    if(curQuestion === undefined || curAnswer === undefined){
+  useEffect(() => {
+    if (curQuestion === undefined || curAnswer === undefined) {
       setCurQuestion(question);
       setCurAnswer(answer);
     }
-  },[question,answer,curQuestion,curAnswer]);
+  }, [question, answer, curQuestion, curAnswer]);
 
   return (
     <Card>
       <CardBody backgroundColor="#0831c4">
         {isEditMode ? (
           <div onClick={onOpenEdit}>
-            <Text textShadow={"2px 2px #000000"}
-            textColor={"#F2B636"}>{curQuestion}</Text>
-                   <Text textShadow={"2px 2px #000000"}
-            textColor={"#F2B636"} backgroundColor={"darkblue"}>({curAnswer})</Text>
+            <Text textShadow={"2px 2px #000000"} textColor={"#F2B636"}>
+              {curQuestion}
+            </Text>
+            <Text
+              textShadow={"2px 2px #000000"}
+              textColor={"#F2B636"}
+              backgroundColor={"darkblue"}
+            >
+              ({curAnswer})
+            </Text>
           </div>
         ) : (
           <Button
@@ -104,7 +114,7 @@ export function QuestionCard({
       <Modal
         isOpen={isOpen}
         onClose={() => {
-          setIsCompleted(true);
+          setIsCompleted(!isCompleted);
           onClose();
         }}
         size={"full"}
@@ -120,24 +130,40 @@ export function QuestionCard({
           <ModalBody marginX="25%" marginY="15%" textAlign={"center"}>
             {isDaily ? (
               <Tabs>
-                <TabList>
-                  <Tab>Daily Double</Tab>
-                  <Tab>Question</Tab>
+                <TabList >
+                  <Tab textColor={"white"} _selected={{ color: 'white', bg: 'blue.400' }}>Daily Double</Tab>
+                  <Tab textColor={"white"} _selected={{ color: 'white', bg: 'blue.400' }}>Question</Tab>
                 </TabList>
 
                 <TabPanels>
                   <TabPanel>
-                    <h1>Daily Double!</h1>
+                    <Text as="b"
+                      width={"40vw"}
+                      fontSize={"5xl"}
+                      textColor={"white"}
+                      >Daily Double!</Text>
                   </TabPanel>
                   <TabPanel>
-                    <p>{curQuestion}</p>
+                    <Text
+                      as="b"
+                      width={"40vw"}
+                      fontSize={"5xl"}
+                      textColor={"white"}
+                    >
+                      {curQuestion}
+                    </Text>
                   </TabPanel>
                 </TabPanels>
               </Tabs>
             ) : (
-              <Text as="b" width={"40vw"} fontSize={"5xl"} textColor={"white"}>
-                {curQuestion}
-              </Text>
+                <Text
+                  as="b"
+                  width={"40vw"}
+                  fontSize={"5xl"}
+                  textColor={"white"}
+                >
+                  {curQuestion}
+                </Text>
             )}
           </ModalBody>
         </ModalContent>
@@ -158,8 +184,18 @@ export function QuestionCard({
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody marginX="5%" marginY="5%" textAlign={"center"}>
-            <Textarea onChange={(e)=>{setNewQuestion(e.target.value)}} defaultValue={newQuestion}></Textarea>
-            <Input onChange={(e)=>{setNewAnswer(e.target.value)}} defaultValue={newAnswer}></Input>
+            <Textarea
+              onChange={(e) => {
+                setNewQuestion(e.target.value);
+              }}
+              defaultValue={newQuestion}
+            ></Textarea>
+            <Input
+              onChange={(e) => {
+                setNewAnswer(e.target.value);
+              }}
+              defaultValue={newAnswer}
+            ></Input>
             <Button onClick={saveCard}>Save</Button>
             <Button>Undo</Button>
           </ModalBody>
