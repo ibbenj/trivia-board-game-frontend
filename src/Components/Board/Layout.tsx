@@ -13,14 +13,19 @@ import { ScoreCards } from "./ScoreCards";
 import { FinalJeopardy } from "./FinalJeopardy";
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
+import { ScoreProvider } from "../../Context/ScoreContext";
 
 export function Layout(/*{ points, isDaily, question, category }*/) {
   const params = useParams();
   const gameID = params.gameID;
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const [board1, setBoard1] = useState<{boardInfo: any, boardContent: any} | undefined>(undefined);
-  const [board2, setBoard2] = useState<{boardInfo: any, boardContent: any} | undefined>(undefined);
+  const [board1, setBoard1] = useState<
+    { boardInfo: any; boardContent: any } | undefined
+  >(undefined);
+  const [board2, setBoard2] = useState<
+    { boardInfo: any; boardContent: any } | undefined
+  >(undefined);
   const [final, setFinal] = useState(undefined);
 
   const setGame = useCallback(async () => {
@@ -53,58 +58,62 @@ export function Layout(/*{ points, isDaily, question, category }*/) {
 
   return (
     // Do three tabs, single, double and final jeopardy
-    <Box marginY="5" marginX="2">
-      <Tabs variant="soft-rounded" colorScheme="green">
-        <TabList justifyContent={"space-around"}>
-          <Flex direction={"row"} justifyContent={"space-between"}>
-            <Flex direction={"row"} justifyContent={"left"}>
-              <Tab>Jeopardy</Tab>
-              <Tab>Double Jeopardy</Tab>
-              <Tab>Final Jeopardy</Tab>
-              {isEditMode ? (
-                <Button
-                  onClick={() => {
-                    setIsEditMode(!isEditMode);
-                  }}
-                >
-                  Play
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => {
-                    setIsEditMode(!isEditMode);
-                  }}
-                >
-                  Edit
-                </Button>
-              )}
+    <ScoreProvider>
+      <Box marginY="5" marginX="2">
+        <Tabs variant="soft-rounded" colorScheme="green">
+          <TabList justifyContent={"space-around"}>
+            <Flex direction={"row"} justifyContent={"space-between"}>
+              <Flex direction={"row"} justifyContent={"left"}>
+                <Tab>Jeopardy</Tab>
+                <Tab>Double Jeopardy</Tab>
+                <Tab>Final Jeopardy</Tab>
+                {isEditMode ? (
+                  <Button
+                    onClick={() => {
+                      setIsEditMode(!isEditMode);
+                    }}
+                  >
+                    Play
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      setIsEditMode(!isEditMode);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                )}
+              </Flex>
+              <Button marginLeft={"5"} onClick={homePage}>
+                Exit Game
+              </Button>
             </Flex>
-            <Button marginLeft={"5"} onClick={homePage}>Exit Game</Button>
-          </Flex>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <JeopardyRound
-              boardInfo={board1.boardInfo}
-              boardContent={board1.boardContent}
-              isDouble={false}
-              isEditMode={isEditMode}
-            />
-          </TabPanel>
-          <TabPanel>
-            <JeopardyRound
-              boardInfo={board2.boardInfo}
-              boardContent={board2.boardContent}
-              isDouble={true}
-              isEditMode={isEditMode}
-            />
-          </TabPanel>
-          <TabPanel>
-            <FinalJeopardy finalBoard={final} isEditMode={isEditMode} />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-      <ScoreCards />
-    </Box>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <JeopardyRound
+                boardInfo={board1.boardInfo}
+                boardContent={board1.boardContent}
+                isDouble={false}
+                isEditMode={isEditMode}
+              />
+            </TabPanel>
+            <TabPanel>
+              <JeopardyRound
+                boardInfo={board2.boardInfo}
+                boardContent={board2.boardContent}
+                isDouble={true}
+                isEditMode={isEditMode}
+              />
+            </TabPanel>
+            <TabPanel>
+              <FinalJeopardy finalBoard={final} isEditMode={isEditMode} />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+        <ScoreCards points={200} />
+      </Box>
+    </ScoreProvider>
   );
 }

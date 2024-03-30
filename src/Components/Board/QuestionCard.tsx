@@ -18,8 +18,10 @@ import {
   Text,
   Textarea,
   Input,
+  ModalFooter,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { ScoreCards } from "./ScoreCards";
 
 export function QuestionCard({
   qNo,
@@ -166,6 +168,9 @@ export function QuestionCard({
                 </Text>
             )}
           </ModalBody>
+          <ModalFooter>
+            <ScoreCards points={points}/>
+          </ModalFooter>
         </ModalContent>
       </Modal>
       <Modal
@@ -199,6 +204,7 @@ export function QuestionCard({
             <Button onClick={saveCard}>Save</Button>
             <Button>Undo</Button>
           </ModalBody>
+         
         </ModalContent>
       </Modal>
     </Card>

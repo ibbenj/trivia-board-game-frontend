@@ -1,17 +1,27 @@
-import {
-  Flex,
-  Box,
-} from "@chakra-ui/react";
-import React from "react";
+import { Flex, Box, Button } from "@chakra-ui/react";
+import React, {useState, useEffect} from "react";
 import { ScoreCard } from "./ScoreCard";
+import { useScoreContext } from "../../Context/ScoreContext";
 
-export function ScoreCards() {
+export function ScoreCards({ points }: { points: number }) {
+  const { players, addPlayer, removePlayer } = useScoreContext();
+
+  const [curPlayers, setCurPlayers] = useState(players);
+
+  useEffect(()=>{
+    setCurPlayers(players);
+  },[players]);
+
   return (
-    <Box>
+    <Box border={"black"} color={"darkgray"}>
       <Flex direction={"row"} justifyContent={"center"}>
-        <ScoreCard />
-        <ScoreCard />
-        <ScoreCard />
+        {curPlayers.map((player, i) => {
+          return <ScoreCard key={i} id={i} player={player} points={points} />;
+        })}
+        <Flex direction={"column"}>
+          <Button onClick={addPlayer}>+</Button>
+          <Button onClick={removePlayer}>-</Button>
+        </Flex>
       </Flex>
     </Box>
   );
