@@ -1,9 +1,14 @@
-"proxy": "http://localhost:3001 -> "proxy": "http://localhost:8080
-
 # Trivia Board Game
 
 ### Description
-A jeopardy inspired game to play. You can edit the categories and boards, and reveal quesitons as you go along. You can have any number of players and keep track of their scores (use the +/- for easy score changing, or manually update the score).
+A jeopardy inspired game to play. You can create multiple games, edit the categories and boards, and reveal quesitons as you go along.
+
+#### Fun Features:
+- Questions's point values disappear after opening the question (and reappear if clicked on again).
+- Double and final jeopardy are included.
+- Daily doubles are randomally selected.
+- You can manually update players' scores (or in a question you can click on the +/- buttons next to a player to add or remove the current question's value from their score).
+- You can add/remove as many number of players as you desire.
 
 ### Run project
 1. Set-up .env variables in backend for PROJECT_URL, SERVICE_KEY, and ANON_KEY.
@@ -14,3 +19,6 @@ A jeopardy inspired game to play. You can edit the categories and boards, and re
 
 ### Reccomendation
 Use https://buzzin.live/ for the buzzer if you don't have a live buzzer mechanism.
+
+<img width="1759" alt="Screenshot 2024-03-31 at 6 21 48 PM" src="https://github.com/ibbenj/trivia-board-game-frontend/assets/67340763/864243c4-991b-4eb4-b2ad-ca2be838d4c6">
+<img width="1791" alt="Screenshot 2024-03-31 at 6 26 29 PM" src="https://github.com/ibbenj/trivia-board-game-frontend/assets/67340763/98ad2034-44f4-4457-aa18-2da61e122f74">
