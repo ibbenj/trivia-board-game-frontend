@@ -18,7 +18,7 @@ A jeopardy inspired game to play. You can create multiple games, edit the catego
 
 
 ### Reccomendation
-Use https://buzzin.live/ for the buzzer if you don't have a live buzzer mechanism.
+I reccomend using https://buzzin.live/ for the buzzer if you don't have a live buzzer mechanism. I came across it and it seems like an effective way to determine order of who buzzed in.
 
 <img width="1759" alt="Screenshot 2024-03-31 at 6 21 48 PM" src="https://github.com/ibbenj/trivia-board-game-frontend/assets/67340763/864243c4-991b-4eb4-b2ad-ca2be838d4c6">
 <img width="1791" alt="Screenshot 2024-03-31 at 6 26 29 PM" src="https://github.com/ibbenj/trivia-board-game-frontend/assets/67340763/98ad2034-44f4-4457-aa18-2da61e122f74">
