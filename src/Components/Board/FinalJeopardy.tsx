@@ -12,8 +12,10 @@ import {
   useDisclosure,
   Textarea,
   Input,
+  ModalFooter,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { ScoreCards } from "./ScoreCards";
 
 export function FinalJeopardy({
   finalBoard,
@@ -94,11 +96,14 @@ export function FinalJeopardy({
             <Text textColor={"white"}>{curCategory}</Text>
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody marginX="25%" marginY="15%" textAlign={"center"}>
+          <ModalBody marginX="25%" marginTop="15%" textAlign={"center"}>
             <Text as="b" width={"40vw"} fontSize={"5xl"} textColor={"white"}>
               {curQuestion}
             </Text>
           </ModalBody>
+          <ModalFooter marginX={"auto"}>
+          <ScoreCards points={undefined} />
+          </ModalFooter>
         </ModalContent>
       </Modal>
       <Modal
