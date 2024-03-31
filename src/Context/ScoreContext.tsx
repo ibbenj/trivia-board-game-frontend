@@ -5,6 +5,7 @@ type ScoreContextValue = {
   players: { name: string; score: number }[];
   changeScore: (playerNum: number, points: number, isIncrease: boolean) => void;
   updateScore: (playerNum: number, score: number) => void;
+  updateName: (playerNum: number, name: string) => void;
   addPlayer: () => void;
   removePlayer: () => void;
 };
@@ -14,6 +15,7 @@ const ScoreContext = createContext<ScoreContextValue>({
   players: [],
   changeScore: () => {},
   updateScore: () => {},
+  updateName: () => {},
   addPlayer: () => {},
   removePlayer: () => {},
 });
@@ -56,6 +58,13 @@ export const ScoreProvider = ({ children }: Props) => {
     setPlayers(newPlayers);
   };
 
+  const updateName = (playerNum: number, name: string) => {
+    const newPlayers = [...players];
+    newPlayers[playerNum].name = name;
+
+    setPlayers(newPlayers);
+  }
+
   // Function to clear all scores
   const addPlayer = () => {
     setPlayers([...players, { name: "New Player", score: 0 }]);
@@ -74,6 +83,7 @@ export const ScoreProvider = ({ children }: Props) => {
     players,
     changeScore,
     updateScore,
+    updateName,
     addPlayer,
     removePlayer,
   };

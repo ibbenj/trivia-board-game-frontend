@@ -19,25 +19,33 @@ export function ScoreCard({
 }: {
   id: number;
   player: { name: string; score: number };
-  points: number;
+  points: number | undefined;
 }) {
-  const { changeScore, updateScore } = useScoreContext();
+  const { changeScore, updateScore, updateName } = useScoreContext();
   const [isEditing, setIsEditing] = useState(false);
 
   return (
     <Card width={"20vw"}>
-      <CardHeader backgroundColor="#0831c4">
-        <Editable textColor={"white"} fontSize={"xl"} value={player.name}>
-          <EditablePreview />
-          <EditableInput />
-        </Editable>
+      <CardHeader backgroundColor="#0831c4" paddingY={"2"}>
+        <Input
+          textAlign={"center"}
+          isDisabled={points !== undefined}
+          border={"none"}
+          textColor={"white"}
+          fontSize={"xl"}
+          defaultValue={player.name}
+          onChange={(e) => {
+            updateName(id, e.target.value);
+          }}
+        />
       </CardHeader>
-      <CardBody backgroundColor="#0831c4">
+      <CardBody backgroundColor="#0831c4" paddingY={"2"}>
         {isEditing ? (
           <>
             <Input
-             textColor={"white"}
-             fontSize={"xl"}
+              textAlign={"center"}
+              textColor={"white"}
+              fontSize={"xl"}
               defaultValue={player.score}
               onChange={(e) => {
                 updateScore(id, Number(e.target.value));
@@ -53,7 +61,6 @@ export function ScoreCard({
               defaultValue={player.score.toString()}
               value={player.score.toString()}
               onSubmit={(value) => {
-                console.log(value);
                 updateScore(id, Number(value));
               }}
             >
@@ -62,10 +69,15 @@ export function ScoreCard({
             </Editable>
           </>
         )}
-        <Flex direction={"row"} justifyContent={"space-between"}>
+        <Flex
+          direction={"row"}
+          justifyContent={"space-between"}
+          marginTop={"2"}
+        >
           <Button
+            isDisabled={points === undefined}
             onClick={() => {
-              changeScore(id, points, true);
+              changeScore(id, points!, true);
             }}
           >
             +
@@ -80,8 +92,9 @@ export function ScoreCard({
           </Button>
 
           <Button
+            isDisabled={points === undefined}
             onClick={() => {
-              changeScore(id, points, false);
+              changeScore(id, points!, false);
             }}
           >
             -

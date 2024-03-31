@@ -168,7 +168,7 @@ export function QuestionCard({
                 </Text>
             )}
           </ModalBody>
-          <ModalFooter>
+          <ModalFooter marginX={"auto"}>
             <ScoreCards points={points}/>
           </ModalFooter>
         </ModalContent>

@@ -112,7 +112,7 @@ export function Layout(/*{ points, isDaily, question, category }*/) {
             </TabPanel>
           </TabPanels>
         </Tabs>
-        <ScoreCards points={200} />
+        <ScoreCards points={undefined} />
       </Box>
     </ScoreProvider>
   );
