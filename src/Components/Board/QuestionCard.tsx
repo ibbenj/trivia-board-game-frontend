@@ -120,6 +120,7 @@ export function QuestionCard({
           onClose();
         }}
         size={"full"}
+        motionPreset='scale'
       >
         <ModalOverlay />
         <ModalContent backgroundColor="#0831c4">
