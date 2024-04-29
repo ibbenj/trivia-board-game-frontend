@@ -11,10 +11,12 @@ A jeopardy inspired game to play. You can create multiple games, edit the catego
 - You can add/remove as many number of players as you desire.
 
 ### Run project
-1. Set-up .env variables in backend for PROJECT_URL, SERVICE_KEY, and ANON_KEY.
-2. In backend run npm i and then npm run dev.
-3. In frontend run npm i and then npm start
-4. Go to http://localhost:3000 and have fun!
+1. Create a Supabase project and add tables matching the schema below (NOTE TO SELF: ADD A MIGRATION FILE THAT CONTAINS SCHEMA TO MAKE THIS PROCESS MUCH EASIER)
+<img width="517" alt="Screenshot 2024-04-28 at 10 41 48 PM" src="https://github.com/ibbenj/trivia-board-game-frontend/assets/67340763/22414a9a-7a70-4804-bd8f-532b1d498951">
+3. Set-up .env variables in backend for PROJECT_URL, SERVICE_KEY, and ANON_KEY based on Supabase project.
+4. In backend run npm i and then npm run dev.
+5. In frontend run npm i and then npm start
+6. Go to http://localhost:3000 and have fun!
 
 
 ### Reccomendation
