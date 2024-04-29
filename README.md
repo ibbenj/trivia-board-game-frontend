@@ -1,7 +1,7 @@
 # Trivia Board Game
 
 ### Description
-A jeopardy inspired game to play. You can create multiple games, edit the categories and boards, and reveal quesitons as you go along.
+A jeopardy inspired game to play. You can create multiple games, edit the categories and boards (using an easy to use interface), and reveal quesitons as you go along.
 
 #### Fun Features:
 - Questions's point values disappear after opening the question (and reappear if clicked on again).
