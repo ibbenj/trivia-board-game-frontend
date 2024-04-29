@@ -1,7 +1,7 @@
 # Trivia Board Game
 
 ### Description
-A jeopardy inspired game to play. You can create multiple games, edit the categories and boards (using an easy to use interface), and reveal quesitons as you go along.
+A jeopardy inspired game to play. You can create multiple games, edit the categories and boards, and reveal quesitons as you go along.
 
 #### Fun Features:
 - Questions's point values disappear after opening the question (and reappear if clicked on again).
@@ -20,5 +20,11 @@ A jeopardy inspired game to play. You can create multiple games, edit the catego
 ### Reccomendation
 I reccomend using https://buzzin.live/ for the buzzer if you don't have a live buzzer mechanism. I came across it and it seems like an effective way to determine order of who buzzed in.
 
+Play board (question's points disappear as you go through them)
 <img width="1759" alt="Screenshot 2024-03-31 at 6 21 48 PM" src="https://github.com/ibbenj/trivia-board-game-frontend/assets/67340763/864243c4-991b-4eb4-b2ad-ca2be838d4c6">
+
+Question
 <img width="1791" alt="Screenshot 2024-03-31 at 6 26 29 PM" src="https://github.com/ibbenj/trivia-board-game-frontend/assets/67340763/98ad2034-44f4-4457-aa18-2da61e122f74">
+
+Edit Mode (shows all answers and can add, modify and save questions)
+<img width="1783" alt="Screenshot 2024-04-28 at 10 26 40 PM" src="https://github.com/ibbenj/trivia-board-game-frontend/assets/67340763/6035f69a-01a9-42ce-b24f-aa6c6ebcbe13">
